@@ -64,7 +64,7 @@ function createCubeGroup() {
     const cubeColors = [
         0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009,
         0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x007FFF,
-        0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009
+        0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0xB52AEA, 0x990009, 0x990009, 0x990009
     ];
 
     // Définir les textes spécifiques pour chaque cube
@@ -76,7 +76,7 @@ function createCubeGroup() {
         "Face 13 - Texte personnalisé 13", "Face 14 - Texte personnalisé 14", "Face 15 - Texte personnalisé 15",
         "Face 16 - Texte personnalisé 16", "Face 17 - Texte personnalisé 17", "Météo",
         "Face 19 - Texte personnalisé 19", "Face 20 - Texte personnalisé 20", "Face 21 - Texte personnalisé 21",
-        "Face 22 - Texte personnalisé 22", "Face 23 - Texte personnalisé 23", "Face 24 - Texte personnalisé 24",
+        "Face 22 - Texte personnalisé 22", "Face 23 - Texte personnalisé 23", "Calculatrice",
         "Face 25 - Texte personnalisé 25", "Face 26 - Texte personnalisé 26", "Face 27 - Texte personnalisé 27"
     ];
 
@@ -89,7 +89,7 @@ function createCubeGroup() {
         "https://example.com/13", "https://example.com/14", "https://example.com/15",
         "https://example.com/16", "https://example.com/17", "https://ewanquelo.github.io/easy-weather/",
         "https://example.com/19", "https://example.com/20", "https://example.com/21",
-        "https://example.com/22", "https://example.com/23", "https://example.com/24",
+        "https://example.com/22", "https://example.com/23", "https://ewanquelo.github.io/calculatrice/",
         "https://example.com/25", "https://example.com/26", "https://example.com/27"
     ];
 
