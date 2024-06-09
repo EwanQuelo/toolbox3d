@@ -12,7 +12,9 @@ function init() {
 
     // Caméra
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 10;
+    camera.position.z = 6;
+    camera.position.y = 8;
+    camera.position.x = 10;
 
     // Rendu
     renderer = new THREE.WebGLRenderer();
@@ -27,8 +29,40 @@ function init() {
     pointLight.position.set(10, 10, 10);
     scene.add(pointLight);
 
+    // Charger les textures
+    const textureLoader = new THREE.TextureLoader();
+    const textures = [
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/weather.jpg'), // 18
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/calculatrice.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+        textureLoader.load('./img/redsquare.png'),
+    ];
+
     // Créer le groupe de cubes
-    createCubeGroup();
+    createCubeGroup(textures);
 
     // Ajouter les contrôles d'orbite
     controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -55,17 +89,10 @@ function onWindowResize() {
 }
 
 // Création du groupe de 27 cubes avec un espace entre eux
-function createCubeGroup() {
+function createCubeGroup(textures) {
     cubeGroup = new THREE.Group();
 
     const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-
-    // Définir les couleurs spécifiques pour chaque cube
-    const cubeColors = [
-        0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009,
-        0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0x007FFF,
-        0x990009, 0x990009, 0x990009, 0x990009, 0x990009, 0xB52AEA, 0x990009, 0x990009, 0x990009
-    ];
 
     // Définir les textes spécifiques pour chaque cube
     const texts = [
@@ -96,29 +123,26 @@ function createCubeGroup() {
     const spacing = 1.3;  // Espace entre les cubes
 
     // Créer 27 cubes
-    let textIndex = 0;
-    for (let x = -1; x <= 1; x++) {
-        for (let y = -1; y <= 1; y++) {
-            for (let z = -1; z <= 1; z++) {
-                const color = cubeColors[textIndex]; // Utiliser les couleurs prédéfinies
-                const cubeMaterial = new THREE.MeshBasicMaterial({ color: color, side: THREE.DoubleSide });
-                const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    for (let i = 0; i < 27; i++) {
+        const cubeMaterial = new THREE.MeshBasicMaterial({ map: textures[i] });
 
-                cube.position.set(x * spacing, y * spacing, z * spacing);
-                cube.userData = { info: texts[textIndex], url: urls[textIndex] };  // Stocker les informations personnalisées pour chaque cube
-                textIndex++;
+        const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+        const x = i % 3 - 1;
+        const y = Math.floor(i / 3) % 3 - 1;
+        const z = Math.floor(i / 9) - 1;
 
-                // Ajouter les bordures noires
-                const edges = new THREE.EdgesGeometry(cubeGeometry);
-                const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
+        cube.position.set(x * spacing, y * spacing, z * spacing);
+        cube.userData = { info: texts[i], url: urls[i] };  // Stocker les informations personnalisées pour chaque cube
 
-                // Ajouter les bordures et le cube au groupe
-                const cubeContainer = new THREE.Group();
-                cubeContainer.add(cube);
-                cubeContainer.add(line);
-                cubeGroup.add(cubeContainer);
-            }
-        }
+        // Ajouter les bordures noires
+        const edges = new THREE.EdgesGeometry(cubeGeometry);
+        const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 }));
+
+        // Ajouter les bordures et le cube au groupe
+        const cubeContainer = new THREE.Group();
+        cubeContainer.add(cube);
+        cubeContainer.add(line);
+        cubeGroup.add(cubeContainer);
     }
 
     scene.add(cubeGroup);
@@ -131,7 +155,7 @@ function createInfoBox() {
     infoBox.style.backgroundColor = 'rgba(50, 50, 50, 0.9)';
     infoBox.style.color = 'white';
     infoBox.style.padding = '10px';
-    infoBox.style.borderRadius = '10px';
+    infoBox.style.borderRadius = '25px';
     infoBox.style.display = 'none';
     infoBox.style.zIndex = '1000';
     document.body.appendChild(infoBox);
