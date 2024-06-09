@@ -12,9 +12,9 @@ function init() {
 
     // Caméra
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 6;
-    camera.position.y = 8;
-    camera.position.x = 10;
+    camera.position.z = 5;
+    camera.position.y = 5;
+    camera.position.x = 5;
 
     // Rendu
     renderer = new THREE.WebGLRenderer();
@@ -158,6 +158,7 @@ function createInfoBox() {
     infoBox.style.borderRadius = '25px';
     infoBox.style.display = 'none';
     infoBox.style.zIndex = '1000';
+    infoBox.style.transitionDuration = '0.3s';
     document.body.appendChild(infoBox);
 }
 
